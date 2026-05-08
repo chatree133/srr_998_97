@@ -246,7 +246,7 @@ function App() {
             >
               <div className="h-40 bg-gray-100 rounded-xl overflow-hidden relative">
                 <img
-                  src="/public/image.png"
+                  src="/image.png"
                   alt="Map Location"
                   className="w-full h-full object-cover filter brightness-95 group-hover:scale-105 transition-transform duration-500"
                   onError={(e) => {
