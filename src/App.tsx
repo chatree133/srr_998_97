@@ -24,7 +24,7 @@ type GalleryTab = 'living' | 'second-floor' | 'back-kitchen' | 'outside' | 'pano
 
 const GALLERY_DATA: Record<GalleryTab, { title: string; images: string[], caption?: string[] }> = {
   'living': {
-    title: 'ชั้น 1 โซนรับแขก',
+    title: 'ชั้น 1 โซนรับแขก-ครัวฝรั่ง',
     images: [
       '/living/20260503_142556.webp',
       '/living/20260503_142623.webp',
@@ -35,7 +35,7 @@ const GALLERY_DATA: Record<GalleryTab, { title: string; images: string[], captio
     ]
   },
   'second-floor': {
-    title: 'ชั้น 2 โซนพักผ่อน',
+    title: 'ชั้น 2 โซนพักผ่อน-3ห้องนอน 2ห้องน้ำ',
     images: [
       '/second-floor/20260503_152613.webp',
       '/second-floor/20260503_152625.webp',
@@ -58,7 +58,7 @@ const GALLERY_DATA: Record<GalleryTab, { title: string; images: string[], captio
     ]
   },
   'back-kitchen': {
-    title: 'ครัวหลังบ้าน',
+    title: 'โซนครัวหลังบ้าน-ต่อเติมปี 2567',
     images: [
       '/back-kitchen/20260503_135439.webp',
       '/back-kitchen/20260503_135500.webp',
@@ -73,7 +73,7 @@ const GALLERY_DATA: Record<GalleryTab, { title: string; images: string[], captio
     ]
   },
   'outside': {
-    title: 'ภายนอก',
+    title: 'ภายนอก จอดรถ2คัน',
     images: [
       '/outside/20260503_171023.webp',
       '/outside/20260503_171030.webp',
