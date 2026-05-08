@@ -347,7 +347,7 @@ function App() {
             <p className="text-gray-500 mb-6">บรรยากาศภายในและภายนอกบ้าน</p>
 
             {/* Tabs */}
-            <div className="flex overflow-x-auto hide-scrollbar gap-2 pb-2">
+            <div className="flex flex-wrap gap-2 pb-2">
               {(Object.entries(GALLERY_DATA) as [GalleryTab, typeof GALLERY_DATA[GalleryTab]][]).map(([key, data]) => (
                 <button
                   key={key}
