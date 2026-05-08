@@ -26,68 +26,68 @@ const GALLERY_DATA: Record<GalleryTab, { title: string; images: string[], captio
   'living': {
     title: 'ชั้น 1 โซนรับแขก',
     images: [
-      '/living/20260503_142556.jpg',
-      '/living/20260503_142623.jpg',
-      '/living/20260503_184544.jpg',
-      '/living/May 8, 2026, 02_23_50 PM.png',
-      '/living/May 8, 2026, 02_39_09 PM.png',
-      '/living/May 8, 2026, 02_55_17 PM.png'
+      '/living/20260503_142556.webp',
+      '/living/20260503_142623.webp',
+      '/living/20260503_184544.webp',
+      '/living/May 8, 2026, 02_23_50 PM.webp',
+      '/living/May 8, 2026, 02_39_09 PM.webp',
+      '/living/May 8, 2026, 02_55_17 PM.webp'
     ]
   },
   'second-floor': {
     title: 'ชั้น 2 โซนพักผ่อน',
     images: [
-      '/second-floor/20260503_152613.jpg',
-      '/second-floor/20260503_152625.jpg',
-      '/second-floor/20260503_152638.jpg',
-      '/second-floor/20260503_152723.jpg',
-      '/second-floor/20260503_152736.jpg',
-      '/second-floor/20260503_152815.jpg',
-      '/second-floor/20260503_152824.jpg',
-      '/second-floor/20260503_152958.jpg',
-      '/second-floor/20260503_153009.jpg',
-      '/second-floor/20260503_153039.jpg',
-      '/second-floor/20260503_153042.jpg',
-      '/second-floor/20260503_153051.jpg',
-      '/second-floor/20260503_153059.jpg',
-      '/second-floor/20260503_153159.jpg',
-      '/second-floor/20260503_153214.jpg',
-      '/second-floor/20260503_153314.jpg',
-      '/second-floor/20260503_153720.jpg',
-      '/second-floor/20260503_153747.jpg'
+      '/second-floor/20260503_152613.webp',
+      '/second-floor/20260503_152625.webp',
+      '/second-floor/20260503_152638.webp',
+      '/second-floor/20260503_152723.webp',
+      '/second-floor/20260503_152736.webp',
+      '/second-floor/20260503_152815.webp',
+      '/second-floor/20260503_152824.webp',
+      '/second-floor/20260503_152958.webp',
+      '/second-floor/20260503_153009.webp',
+      '/second-floor/20260503_153039.webp',
+      '/second-floor/20260503_153042.webp',
+      '/second-floor/20260503_153051.webp',
+      '/second-floor/20260503_153059.webp',
+      '/second-floor/20260503_153159.webp',
+      '/second-floor/20260503_153214.webp',
+      '/second-floor/20260503_153314.webp',
+      '/second-floor/20260503_153720.webp',
+      '/second-floor/20260503_153747.webp'
     ]
   },
   'back-kitchen': {
     title: 'ครัวหลังบ้าน',
     images: [
-      '/back-kitchen/20260503_135439.jpg',
-      '/back-kitchen/20260503_135500.jpg',
-      '/back-kitchen/20260503_135518.jpg',
-      '/back-kitchen/20260503_135550.jpg',
-      '/back-kitchen/20260503_135611.jpg',
-      '/back-kitchen/20260503_135737.jpg',
-      '/back-kitchen/20260503_135812.jpg',
-      '/back-kitchen/20260503_135907.jpg',
-      '/back-kitchen/20260503_135934.jpg',
-      '/back-kitchen/May 8, 2026, 02_14_04 PM.png'
+      '/back-kitchen/20260503_135439.webp',
+      '/back-kitchen/20260503_135500.webp',
+      '/back-kitchen/20260503_135518.webp',
+      '/back-kitchen/20260503_135550.webp',
+      '/back-kitchen/20260503_135611.webp',
+      '/back-kitchen/20260503_135737.webp',
+      '/back-kitchen/20260503_135812.webp',
+      '/back-kitchen/20260503_135907.webp',
+      '/back-kitchen/20260503_135934.webp',
+      '/back-kitchen/May 8, 2026, 02_14_04 PM.webp'
     ]
   },
   'outside': {
     title: 'ภายนอก',
     images: [
-      '/outside/20260503_171023.jpg',
-      '/outside/20260503_171030.jpg',
-      '/outside/20260503_171036.jpg',
-      '/outside/May 8, 2026, 02_16_18 PM.png',
-      '/outside/May 8, 2026, 02_19_14 PM.png'
+      '/outside/20260503_171023.webp',
+      '/outside/20260503_171030.webp',
+      '/outside/20260503_171036.webp',
+      '/outside/May 8, 2026, 02_16_18 PM.webp',
+      '/outside/May 8, 2026, 02_19_14 PM.webp'
     ]
   },
   'pano': {
     title: 'พาโนราม่า',
     images: [
-      '/pano/pano_20260503_152855.jpg',
-      '/pano/pano_May 8, 2026, 01_58_00 PM.png',
-      '/pano/pano_May 8, 2026, 02_07_25 PM.png'
+      '/pano/pano_20260503_152855.webp',
+      '/pano/pano_May 8, 2026, 01_58_00 PM.webp',
+      '/pano/pano_May 8, 2026, 02_07_25 PM.webp'
     ],
     caption: [
       'ห้องนอนกลาง',
@@ -155,7 +155,7 @@ function App() {
       <section className="relative h-[85vh] md:h-screen w-full flex items-end justify-center pb-20 md:pb-32 px-4">
         <div className="absolute inset-0 z-0">
           <img
-            src="/main.png"
+            src="/main.webp"
             alt="บ้านแฝด ทรัพย์รุ่งเรืองซิตี้"
             className="w-full h-full object-cover"
           />
@@ -322,7 +322,7 @@ function App() {
             >
               <div className="h-40 bg-gray-100 rounded-xl overflow-hidden relative">
                 <img
-                  src="/image.png"
+                  src="/image.webp"
                   alt="Map Location"
                   className="w-full h-full object-cover filter brightness-95 group-hover:scale-105 transition-transform duration-500"
                   onError={(e) => {
