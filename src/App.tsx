@@ -18,17 +18,93 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const IMAGES = [
-  { id: 1, src: '/house_exterior.png', alt: 'หน้าบ้าน และที่จอดรถ', type: 'normal' },
-  { id: 2, src: '/house_living_room.png', alt: 'ห้องรับแขก', type: 'normal' },
-  { id: 3, src: '/house_bedroom.png', alt: 'ห้องนอน', type: 'normal' },
-  { id: 4, src: '/house_kitchen.png', alt: 'ห้องครัว', type: 'normal' },
-];
+import PanoViewer from './PanoViewer';
+
+type GalleryTab = 'living' | 'second-floor' | 'back-kitchen' | 'outside' | 'pano';
+
+const GALLERY_DATA: Record<GalleryTab, { title: string; images: string[], caption?: string[] }> = {
+  'living': {
+    title: 'ชั้น 1 โซนรับแขก',
+    images: [
+      '/living/20260503_142556.jpg',
+      '/living/20260503_142623.jpg',
+      '/living/20260503_184544.jpg',
+      '/living/May 8, 2026, 02_23_50 PM.png',
+      '/living/May 8, 2026, 02_39_09 PM.png',
+      '/living/May 8, 2026, 02_55_17 PM.png'
+    ]
+  },
+  'second-floor': {
+    title: 'ชั้น 2 โซนพักผ่อน',
+    images: [
+      '/second-floor/20260503_152613.jpg',
+      '/second-floor/20260503_152625.jpg',
+      '/second-floor/20260503_152638.jpg',
+      '/second-floor/20260503_152723.jpg',
+      '/second-floor/20260503_152736.jpg',
+      '/second-floor/20260503_152815.jpg',
+      '/second-floor/20260503_152824.jpg',
+      '/second-floor/20260503_152958.jpg',
+      '/second-floor/20260503_153009.jpg',
+      '/second-floor/20260503_153039.jpg',
+      '/second-floor/20260503_153042.jpg',
+      '/second-floor/20260503_153051.jpg',
+      '/second-floor/20260503_153059.jpg',
+      '/second-floor/20260503_153159.jpg',
+      '/second-floor/20260503_153214.jpg',
+      '/second-floor/20260503_153314.jpg',
+      '/second-floor/20260503_153720.jpg',
+      '/second-floor/20260503_153747.jpg'
+    ]
+  },
+  'back-kitchen': {
+    title: 'ครัวหลังบ้าน',
+    images: [
+      '/back-kitchen/20260503_135439.jpg',
+      '/back-kitchen/20260503_135500.jpg',
+      '/back-kitchen/20260503_135518.jpg',
+      '/back-kitchen/20260503_135550.jpg',
+      '/back-kitchen/20260503_135611.jpg',
+      '/back-kitchen/20260503_135737.jpg',
+      '/back-kitchen/20260503_135812.jpg',
+      '/back-kitchen/20260503_135907.jpg',
+      '/back-kitchen/20260503_135934.jpg',
+      '/back-kitchen/May 8, 2026, 02_14_04 PM.png'
+    ]
+  },
+  'outside': {
+    title: 'ภายนอก',
+    images: [
+      '/outside/20260503_171023.jpg',
+      '/outside/20260503_171030.jpg',
+      '/outside/20260503_171036.jpg',
+      '/outside/May 8, 2026, 02_16_18 PM.png',
+      '/outside/May 8, 2026, 02_19_14 PM.png'
+    ]
+  },
+  'pano': {
+    title: 'พาโนราม่า',
+    images: [
+      '/pano/pano_20260503_152855.jpg',
+      '/pano/pano_May 8, 2026, 01_58_00 PM.png',
+      '/pano/pano_May 8, 2026, 02_07_25 PM.png'
+    ],
+    caption: [
+      'ห้องนอนกลาง',
+      'ห้องรับแขก',
+      'ห้องนอนใหญ่',
+    ]
+  }
+};
 
 function App() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeTab, setActiveTab] = useState<GalleryTab>('living');
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const activeImages = GALLERY_DATA[activeTab].images;
+  const activeCaption = GALLERY_DATA[activeTab].caption || [];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,12 +127,12 @@ function App() {
 
   const nextImage = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setCurrentImageIndex((prev) => (prev + 1) % IMAGES.length);
+    setCurrentImageIndex((prev) => (prev + 1) % activeImages.length);
   };
 
   const prevImage = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setCurrentImageIndex((prev) => (prev - 1 + IMAGES.length) % IMAGES.length);
+    setCurrentImageIndex((prev) => (prev - 1 + activeImages.length) % activeImages.length);
   };
 
   return (
@@ -79,7 +155,7 @@ function App() {
       <section className="relative h-[85vh] md:h-screen w-full flex items-end justify-center pb-20 md:pb-32 px-4">
         <div className="absolute inset-0 z-0">
           <img
-            src="/house_exterior.png"
+            src="/main.png"
             alt="บ้านแฝด ทรัพย์รุ่งเรืองซิตี้"
             className="w-full h-full object-cover"
           />
@@ -266,43 +342,59 @@ function App() {
 
         {/* Gallery Section */}
         <section className="mb-24">
-          <div className="flex justify-between items-end mb-8">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">แกลลอรี่ภาพถ่าย</h2>
-              <p className="text-gray-500">บรรยากาศภายในและภายนอกบ้าน</p>
+          <div className="flex flex-col mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">แกลลอรี่ภาพถ่าย</h2>
+            <p className="text-gray-500 mb-6">บรรยากาศภายในและภายนอกบ้าน</p>
+
+            {/* Tabs */}
+            <div className="flex overflow-x-auto hide-scrollbar gap-2 pb-2">
+              {(Object.entries(GALLERY_DATA) as [GalleryTab, typeof GALLERY_DATA[GalleryTab]][]).map(([key, data]) => (
+                <button
+                  key={key}
+                  onClick={() => { setActiveTab(key); setCurrentImageIndex(0); }}
+                  className={`whitespace-nowrap px-6 py-2.5 rounded-full font-medium transition-all ${activeTab === key
+                    ? 'bg-primary-500 text-white shadow-md'
+                    : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'
+                    }`}
+                >
+                  {data.title}
+                </button>
+              ))}
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-4 auto-rows-[250px]">
-            {IMAGES.map((img, index) => {
-              // Custom span sizes for masonry feel
-              const isLarge = index === 0;
-              const spanClass = isLarge ? "md:col-span-8 md:row-span-2" : "md:col-span-4";
-
-              return (
+          {activeTab === 'pano' ? (
+            <div className="grid grid-cols-1 gap-6">
+              {activeImages.map((src, index) => (
+                <div key={index} className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
+                  <div className="font-medium text-gray-700 mb-3">{activeCaption[index] || `พาโนราม่า ${index + 1}`}</div>
+                  <PanoViewer src={src} />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 auto-rows-[250px]">
+              {activeImages.map((src, index) => (
                 <motion.div
-                  key={img.id}
+                  key={index}
                   whileHover={{ scale: 0.985 }}
-                  className={`${spanClass} relative rounded-2xl overflow-hidden cursor-pointer group shadow-sm hover:shadow-md transition-shadow bg-gray-200`}
+                  className="relative rounded-2xl overflow-hidden cursor-pointer group shadow-sm hover:shadow-md transition-shadow bg-gray-200"
                   onClick={() => openLightbox(index)}
                 >
                   <img
-                    src={img.src}
-                    alt={img.alt}
+                    src={src}
+                    alt={`${GALLERY_DATA[activeTab].title} ${index + 1}`}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                    <div className="text-white">
-                      <div className="font-medium text-lg">{img.alt}</div>
-                      <div className="flex items-center gap-1 text-sm text-gray-300 mt-1">
-                        <Maximize2 size={14} /> แตะเพื่อขยาย
-                      </div>
+                    <div className="text-white flex items-center gap-2">
+                      <Maximize2 size={16} /> แตะเพื่อขยาย
                     </div>
                   </div>
                 </motion.div>
-              );
-            })}
-          </div>
+              ))}
+            </div>
+          )}
         </section>
       </main>
 
@@ -344,12 +436,12 @@ function App() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                src={IMAGES[currentImageIndex].src}
-                alt={IMAGES[currentImageIndex].alt}
+                src={activeImages[currentImageIndex]}
+                alt={`${GALLERY_DATA[activeTab].title} ${currentImageIndex + 1}`}
                 className="w-full h-full object-contain max-h-[85vh] rounded-lg shadow-2xl"
               />
               <div className="absolute bottom-[-40px] left-0 right-0 text-center text-white/80 font-medium text-lg">
-                {IMAGES[currentImageIndex].alt} ({currentImageIndex + 1} / {IMAGES.length})
+                {GALLERY_DATA[activeTab].title} ({currentImageIndex + 1} / {activeImages.length})
               </div>
             </div>
           </motion.div>
